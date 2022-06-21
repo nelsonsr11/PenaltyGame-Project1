@@ -1,0 +1,16 @@
+#canvas{
+    background-image: url(/images/5571916.jpg);
+    background-size: 132vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: grey;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    display:block;
+    width:100px,100px;
+    
+}
+
