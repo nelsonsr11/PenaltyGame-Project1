@@ -4,6 +4,9 @@ let int;
 let stopCount = 0;
 let kicked = false;
 let start = false;
+let player1;
+let player2;
+let ball;
 
 let canvas = document.getElementById(`canvas`);
 let ctx = canvas.getContext(`2d`);
@@ -11,32 +14,13 @@ let ctx = canvas.getContext(`2d`);
 canvas.h = 800;
 canvas.w = 1400;
 
-let img = new Image();
-img.src = "images/Idle (1).png";
-
-let img2 = new Image();
-img2.src = "images/ball.png";
-
-let img3 = new Image();
-img3.src = "images/goalie.png";
-
-let img4 = new Image();
-img4.src = "images/main.jpg";
-
-let img5 = new Image();
-img5.src = "images/scoreboard.png";
-
-let img6 = new Image();
-img6.src = "images/cup.png";
-
-let goal = new Audio("sounds/Goal.mp3");
-let crowd = new Audio("sounds/Crowd.mp3");
-
 img4.onload = function () {
   ctx.drawImage(img4, 0, 0, canvas.width, canvas.height);
+  // penalty game logo
   ctx.fillStyle = "Black";
   ctx.font = "75px Bangers";
   ctx.fillText("Penalty Game", 60, 150);
+  // intructions for the game
   ctx.fillStyle = "Black";
   ctx.font = "45px Orbitron";
   ctx.fillText("Instructions for the game", 760, 100);
@@ -50,12 +34,14 @@ img4.onload = function () {
   );
 };
 
+// stopping the blinking start game message after it starts
 let blink_speed = 800;
 let t = setInterval(function () {
   let ele = document.getElementById("pressEnter");
   ele.style.visibility = ele.style.visibility == "hidden" ? "" : "hidden";
 }, blink_speed);
 
+// create class for each character
 class Kicker {
   constructor() {
     this.w = 230;
@@ -120,10 +106,7 @@ class Ball {
   }
 }
 
-let player1;
-let player2;
-let ball;
-
+// start game
 function StartGame() {
   let el = document.querySelector("#pressEnter");
   if (el) {
@@ -143,6 +126,7 @@ function StartGame() {
   clearInterval(t);
 }
 
+// restart game
 function RestartGame() {
   if (ball.y !== 690 && player2.position === ball.position) {
     ctx.font = "30px Arial";
@@ -159,6 +143,7 @@ function RestartGame() {
   }
 }
 
+//score counter
 function ScoreCounter() {
   if (ball.position === player2.position) {
     goalieScore += 1;
@@ -168,20 +153,24 @@ function ScoreCounter() {
   }
 }
 
+// game over
 function gameOver() {
   window.cancelAnimationFrame(int);
   clearInterval(int);
-  console.log("GAME OVER");
+  start = false;
   ctx.drawImage(img4, 0, 0, canvas.w, canvas.h);
+  // match facts
   ctx.fillStyle = "black";
   ctx.font = "45px Orbitron";
   ctx.fillText("Match Facts:", 900, 100);
   ctx.font = "23px Bangers";
   ctx.fillText(`-You scored ${score} penalties.`, 850, 150);
   ctx.fillText(`-The Goalie stopped ${goalieScore} penalties.`, 850, 200);
+  // press enter to play again
   ctx.fillStyle = "white";
   ctx.font = "55px Bangers";
   ctx.fillText("Press Enter to Play Again", 1050, 750, 300, 300);
+  //picking winner
   ctx.fillStyle = "black";
   if (score > goalieScore) {
     ctx.drawImage(img6, 150, 400, 300, 300);
@@ -204,15 +193,16 @@ function gameOver() {
       250
     );
   }
-  start = false;
 }
 
+// stop the counting
 function StopCounting() {
   if (score + goalieScore === 5) {
     gameOver();
   }
 }
 
+// score board on top left side
 function scoreBoard() {
   ctx.drawImage(img5, 10, -50, 400, 180);
   ctx.fillStyle = "black";
@@ -221,6 +211,7 @@ function scoreBoard() {
   ctx.fillText(`${goalieScore}    Goalie `, 230, 50);
 }
 
+// all the key commands
 window.addEventListener("keydown", function (e) {
   console.log(e.key);
   switch (e.key) {
@@ -256,8 +247,8 @@ window.addEventListener("keydown", function (e) {
     }
   }
 
-  if (e.key === "ArrowRight" && start === true) {
-    if (kicked === false) {
+  if (e.key === "ArrowRight") {
+    if (kicked === false && start === true) {
       ball.move(1);
       ball.x += 190;
       ball.y -= 115;
