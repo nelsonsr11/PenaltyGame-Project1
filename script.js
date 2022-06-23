@@ -25,7 +25,11 @@ img4.onload = function () {
   ctx.font = "45px Orbitron";
   ctx.fillText("Instructions for the game", 760, 100);
   ctx.font = "20px  Bangers";
-  ctx.fillText("-Use arrow keys to select direction of your shoot.", 795, 150);
+  ctx.fillText(
+    "-Use arrow or a, w, and d keys to select direction of your shoot.",
+    795,
+    150
+  );
   ctx.fillText("-Press Space key after each kick to restart round. ", 795, 200);
   ctx.fillText(
     "-You have 5 tries to beat the goalie so try your best.",
@@ -221,7 +225,7 @@ window.addEventListener("keydown", function (e) {
       break;
   }
 
-  if (e.key === "ArrowUp") {
+  if (e.key === "ArrowUp" || e.key === "w") {
     if (kicked === false && start === true) {
       ball.y -= 115;
       ball.x += 45;
@@ -234,7 +238,7 @@ window.addEventListener("keydown", function (e) {
     }
   }
 
-  if (e.key === "ArrowLeft") {
+  if (e.key === "ArrowLeft" || e.key === "a") {
     if (kicked === false && start === true) {
       ball.move(-1);
       ball.x -= 110;
@@ -247,7 +251,7 @@ window.addEventListener("keydown", function (e) {
     }
   }
 
-  if (e.key === "ArrowRight") {
+  if (e.key === "ArrowRight" || e.key === "d") {
     if (kicked === false && start === true) {
       ball.move(1);
       ball.x += 190;
