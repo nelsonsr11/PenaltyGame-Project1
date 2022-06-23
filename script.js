@@ -1,12 +1,9 @@
-// let lop;
-
 let score = 0;
 let goalieScore = 0;
 let int;
 let stopCount = 0;
 let kicked = false;
 let start = false;
-//let lines = txt.split("\n");
 
 let canvas = document.getElementById(`canvas`);
 let ctx = canvas.getContext(`2d`);
@@ -35,13 +32,8 @@ img6.src = "images/cup.png";
 let goal = new Audio("sounds/Goal.mp3");
 let crowd = new Audio("sounds/Crowd.mp3");
 
-// let img6 = new Image();
-// img6.src = "images/screen.png";
-
 img4.onload = function () {
   ctx.drawImage(img4, 0, 0, canvas.width, canvas.height);
-  // console.log(img4);
-  // ctx.fillRect(0, 0, canvas.w, canvas.h);
   ctx.fillStyle = "Black";
   ctx.font = "75px Bangers";
   ctx.fillText("Penalty Game", 60, 150);
@@ -56,8 +48,6 @@ img4.onload = function () {
     795,
     250
   );
-  //   ctx.fillText("Instructions for the game", 900, 100);
-  //   ctx.fillText("Instructions for the game", 900, 100);
 };
 
 let blink_speed = 800; // every 1000 == 1 second, adjust to suit
@@ -76,9 +66,7 @@ class Kicker {
   }
 
   draw() {
-    // ctx.drawImage(this.image, this.x, this.y, this.w, this.h)
     ctx.fillStyle = "black";
-    //ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
   }
 }
@@ -106,16 +94,12 @@ class Goalie {
     }
 
     this.position = newPosition;
-    // if(ball.x !== ball.position){
-    // ctx.fillRect(this.x + this.position + 500,this.y,this.w,this.h)
-    // }
 
     //randomly choose a position for the goalie to m,ove
   }
 
   draw() {
     ctx.fillStyle = "blue";
-    // ctx.fillRect(this.x + 200 * this.position, this.y, this.w, this.h);
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
   }
 }
@@ -135,30 +119,9 @@ class Ball {
 
   draw() {
     ctx.fillStyle = "white";
-    // ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
   }
-
-  // update(){
-  //     this.x += this.dx
-  //     this.y += this.dy
-  // }
 }
-
-//  class GoalieBox {
-//     constructor(){
-//     this.w = 480;
-//     this.h = 180;
-//     this.y = 415;
-//     this.x = 460;
-
-// }
-//     draw(){
-//         ctx.fillStyle = 'red'
-//         ctx.fillRect(this.x,this.y,this.w,this.h)
-//     }
-
-// }
 
 let player1;
 let player2;
@@ -178,25 +141,22 @@ function StartGame() {
 
   crowd.play();
   crowd.volume = 0.15;
-  //   console.log(lop);
+
   animate();
   clearInterval(t);
 }
-//let goalie = new GoalieBox()
 
 function RestartGame() {
-  // console.log("RESTARTING GAME", ball.x)
   if (ball.y !== 690 && player2.position === ball.position) {
     ctx.font = "30px Arial";
     ctx.fillStyle = "white";
     ctx.fillText("The Goalie got your ball! Press SPACE to Continue", 370, 400);
-    // ctx.fillText("Press SPACE to Continue", 1000, 150);
     ScoreCounter();
     window.cancelAnimationFrame(int);
   } else if (player2.position !== ball.position) {
     ctx.font = "30px Arial";
     ctx.fillText("GOALLLLL!!!!! Press Space For Next Round", 410, 400);
-    // ctx.fillText("Press Space For Next Round", 650, 350);
+
     ScoreCounter();
     window.cancelAnimationFrame(int);
   }
@@ -208,7 +168,6 @@ function ScoreCounter() {
   } else if (ball.position !== player2.position) {
     score += 1;
     goal.play();
-    // goal.volume =
   }
 }
 
@@ -219,7 +178,6 @@ function gameOver() {
   ctx.drawImage(img4, 0, 0, canvas.w, canvas.h);
   ctx.fillStyle = "black";
   ctx.font = "45px Orbitron";
-  //ctx.fillText("WOW! That was an amazing penalty round.", 60, 350);
   ctx.fillText("Match Facts:", 900, 100);
   ctx.font = "23px Bangers";
   ctx.fillText(`-You scored ${score} penalties.`, 850, 150);
@@ -238,8 +196,6 @@ function gameOver() {
       850,
       250
     );
-
-    // start === false;
   } else if (goalieScore > score) {
     ctx.drawImage(img6, 150, 400, 300, 300);
     ctx.font = "50px Bangers";
@@ -250,13 +206,11 @@ function gameOver() {
       850,
       250
     );
-    // start === false;
   }
   start = false;
 }
 
 function StopCounting() {
-  // console.log("lol", stopCount);
   if (score + goalieScore === 5) {
     gameOver();
   }
@@ -290,13 +244,6 @@ window.addEventListener("keydown", function (e) {
       player2.move();
       kicked = true;
     }
-    // if(player2.position === ball.position){
-    //     console.log('loser')
-    // } else{
-    //     console.log('you won')
-    // }
-    // ctx.fillStyle = 'blue'
-    // ctx.fillText('Press Space to Continue to Next Round',50,400)
   }
 
   if (e.key === "ArrowLeft") {
@@ -310,15 +257,6 @@ window.addEventListener("keydown", function (e) {
       player2.move();
       kicked = true;
     }
-
-    // if(player2.position === ball.position){
-    //     console.log('loser')
-    // } else{
-    //     console.log('you won')
-    // }
-    // ctx.fillStyle = 'blue'
-
-    // ctx.fillText('Press Space to Continue to Next Round',50,400)
   }
 
   if (e.key === "ArrowRight" && start === true) {
@@ -332,25 +270,8 @@ window.addEventListener("keydown", function (e) {
       player2.move();
       kicked = true;
     }
-
-    // if(player2.position === ball.position){
-    //     console.log('loser')
-    // } else{
-    //     console.log('you won')
-    // }
-    // ctx.fillStyle = 'blue'
-    // ctx.fillText('Press Space to Continue to Next Round',50,400)
   }
 
-  //   if (player2.position === ball.position) {
-  //     console.log("loser");
-  //   } else {
-  //     console.log("you won");
-  //   }
-
-  //kicked = true
-
-  // console.log('e', e.key)
   if (e.key === " " && kicked === true) {
     player2.position = 0;
     player2.w = 195;
@@ -366,16 +287,8 @@ window.addEventListener("keydown", function (e) {
 
     kicked = false;
 
-    // kicked = true;
-
     animate();
   }
-
-  //   if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "ArrowUp") {
-  //     stopCount += 1;
-  //   }
-
-  // console.log("stop the count", stopCount);
 });
 
 function animate() {
@@ -384,16 +297,7 @@ function animate() {
   player1.draw();
   player2.draw();
   ball.draw();
-  //   ctx.drawImage(img6, 820, 10, 700, 250);
-  // ball.move()
   StopCounting();
   RestartGame();
   scoreBoard();
-  //gameOver()
-
-  //      if(kicked){
-  //      RestartGame()
-  // }
 }
-
-//  animate()
