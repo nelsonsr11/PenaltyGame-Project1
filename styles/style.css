@@ -14,3 +14,20 @@
     
 }
 
+#pressEnter{
+    color: whitesmoke;
+    font-size: 50px;
+    text-align: center;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 1400px;
+    height: 800px;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
