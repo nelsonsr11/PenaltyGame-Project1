@@ -224,6 +224,10 @@ function gameOver() {
   ctx.font = "23px Bangers";
   ctx.fillText(`-You scored ${score} penalties.`, 850, 150);
   ctx.fillText(`-The Goalie stopped ${goalieScore} penalties.`, 850, 200);
+  ctx.fillStyle = "white";
+  ctx.font = "55px Bangers";
+  ctx.fillText("Press Enter to Play Again", 1050, 750, 300, 300);
+  ctx.fillStyle = "black";
   if (score > goalieScore) {
     ctx.drawImage(img6, 150, 400, 300, 300);
     ctx.font = "50px Bangers";
@@ -234,6 +238,7 @@ function gameOver() {
       850,
       250
     );
+
     // start === false;
   } else if (goalieScore > score) {
     ctx.drawImage(img6, 150, 400, 300, 300);
