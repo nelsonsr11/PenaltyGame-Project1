@@ -50,7 +50,7 @@ img4.onload = function () {
   );
 };
 
-let blink_speed = 800; // every 1000 == 1 second, adjust to suit
+let blink_speed = 800;
 let t = setInterval(function () {
   let ele = document.getElementById("pressEnter");
   ele.style.visibility = ele.style.visibility == "hidden" ? "" : "hidden";
@@ -82,7 +82,6 @@ class Goalie {
   }
 
   move() {
-    // positions -1 0 1
     let newPosition = Math.floor(Math.random() * 3 - 1);
     console.log(newPosition);
     if (newPosition === -1) {
@@ -94,8 +93,6 @@ class Goalie {
     }
 
     this.position = newPosition;
-
-    //randomly choose a position for the goalie to m,ove
   }
 
   draw() {
